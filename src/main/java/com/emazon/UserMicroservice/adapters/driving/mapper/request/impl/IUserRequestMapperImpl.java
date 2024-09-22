@@ -1,7 +1,7 @@
-package com.emazon.UserMicroservice.adapters.driving.mapper.impl;
+package com.emazon.UserMicroservice.adapters.driving.mapper.request.impl;
 
 import com.emazon.UserMicroservice.adapters.driving.dto.request.UserRequest;
-import com.emazon.UserMicroservice.adapters.driving.mapper.IUserRequestMapper;
+import com.emazon.UserMicroservice.adapters.driving.mapper.request.IUserRequestMapper;
 import com.emazon.UserMicroservice.domain.model.Role;
 import com.emazon.UserMicroservice.domain.model.User;
 import org.springframework.stereotype.Component;

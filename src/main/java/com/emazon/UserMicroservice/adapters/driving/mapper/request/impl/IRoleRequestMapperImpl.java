@@ -1,7 +1,7 @@
-package com.emazon.UserMicroservice.adapters.driving.mapper.impl;
+package com.emazon.UserMicroservice.adapters.driving.mapper.request.impl;
 
 import com.emazon.UserMicroservice.adapters.driving.dto.request.RoleRequest;
-import com.emazon.UserMicroservice.adapters.driving.mapper.IRoleRequestMapper;
+import com.emazon.UserMicroservice.adapters.driving.mapper.request.IRoleRequestMapper;
 import com.emazon.UserMicroservice.domain.model.Role;
 import org.springframework.stereotype.Component;
 

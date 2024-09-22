@@ -6,12 +6,17 @@ import com.emazon.UserMicroservice.adapters.driven.jpa.mysql.mapper.IRoleEntityM
 import com.emazon.UserMicroservice.adapters.driven.jpa.mysql.mapper.IUserEntityMapper;
 import com.emazon.UserMicroservice.adapters.driven.jpa.mysql.repository.IRoleRepository;
 import com.emazon.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRepository;
-import com.emazon.UserMicroservice.configuration.security.PasswordEncoder;
+import com.emazon.UserMicroservice.adapters.driven.encoder.EncoderPort;
+import com.emazon.UserMicroservice.adapters.driven.token.jwt.JwtKeyGeneratorService;
+import com.emazon.UserMicroservice.adapters.driving.mapper.request.IAuthenticationRequestMapper;
+import com.emazon.UserMicroservice.domain.api.IAuthenticationServicePort;
 import com.emazon.UserMicroservice.domain.api.IRoleServicePort;
 import com.emazon.UserMicroservice.domain.api.IUserServicePort;
+import com.emazon.UserMicroservice.domain.api.usecase.AuthenticationUseCase;
 import com.emazon.UserMicroservice.domain.api.usecase.RoleUseCase;
 import com.emazon.UserMicroservice.domain.api.usecase.UserUseCase;
-import com.emazon.UserMicroservice.domain.spi.IPasswordEncoder;
+import com.emazon.UserMicroservice.domain.spi.ITokenPort;
+import com.emazon.UserMicroservice.domain.spi.IEncoderPort;
 import com.emazon.UserMicroservice.domain.spi.IRolePersistencePort;
 import com.emazon.UserMicroservice.domain.spi.IUserPersistencePort;
 import org.springframework.context.annotation.Bean;
@@ -32,8 +37,8 @@ public class BeanConfiguration {
         this.roleRepository = roleRepository;
     }
     @Bean
-    public IPasswordEncoder passwordEncoder() {
-        return new PasswordEncoder(new BCryptPasswordEncoder());
+    public IEncoderPort passwordEncoder() {
+        return new EncoderPort(new BCryptPasswordEncoder());
     }
 
     @Bean
@@ -54,4 +59,12 @@ public class BeanConfiguration {
     public IRoleServicePort roleServicePort() {
         return new RoleUseCase(rolePersistencePort());
     }
+
+    @Bean
+    public ITokenPort tokenPort(){ return new JwtKeyGeneratorService(userRepository, userEntityMapper);
+    }
+
+    @Bean
+    public IAuthenticationServicePort authServicePort(){ return new AuthenticationUseCase(userPersistencePort(), passwordEncoder(), tokenPort());}
+
 }

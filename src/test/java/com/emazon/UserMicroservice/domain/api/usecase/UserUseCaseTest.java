@@ -3,37 +3,34 @@ package com.emazon.UserMicroservice.domain.api.usecase;
 import com.emazon.UserMicroservice.domain.exception.UserAlreadyExistsException;
 import com.emazon.UserMicroservice.domain.model.Role;
 import com.emazon.UserMicroservice.domain.model.User;
-import com.emazon.UserMicroservice.domain.spi.IPasswordEncoder;
+import com.emazon.UserMicroservice.domain.spi.IEncoderPort;
 import com.emazon.UserMicroservice.domain.spi.IUserPersistencePort;
 import com.emazon.UserMicroservice.domain.util.Constants;
 import com.emazon.UserMicroservice.domain.util.DefaultRoles;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class UserUseCaseTest {
 
     @Mock
     private IUserPersistencePort userPersistencePort;
 
     @Mock
-    private IPasswordEncoder passwordEncoder;
+    private IEncoderPort passwordEncoder;
 
     @InjectMocks
     private UserUseCase userUseCase;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
 
     @Test
     @DisplayName("Should throw exception when user email already exists")
@@ -64,9 +61,9 @@ class UserUseCaseTest {
 
         verify(userPersistencePort).createUser(user);
         assertNotNull(user.getRole());
-        assertEquals(DefaultRoles.AUX_ID, user.getRole().getId());
-        assertEquals(DefaultRoles.AUX_ROLE, user.getRole().getName());
-        assertEquals(DefaultRoles.AUX_DESCRIPTION, user.getRole().getDescription());
+        assertEquals(DefaultRoles.ASSISTANT_ID, user.getRole().getId());
+        assertEquals(DefaultRoles.ASSISTANT_ROLE_NAME, user.getRole().getName());
+        assertEquals(DefaultRoles.ASSISTANT_DESCRIPTION, user.getRole().getDescription());
     }
 
     @Test

@@ -57,7 +57,7 @@ public class IUserEntityMapperImpl implements IUserEntityMapper {
         password = userEntity.getPassword();
         role = roleEntityToRol(userEntity.getRole());
 
-        return new User(id, name, lastName, idDocument, phone, dateOfBirth,password, email, role);
+        return new User(id, name, lastName, idDocument, phone, dateOfBirth,email , password, role);
     }
 
     protected RoleEntity roleToRoleEntity(Role role) {

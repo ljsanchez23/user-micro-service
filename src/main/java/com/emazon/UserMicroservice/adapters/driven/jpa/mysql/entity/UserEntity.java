@@ -1,11 +1,12 @@
 package com.emazon.UserMicroservice.adapters.driven.jpa.mysql.entity;
 
+import com.emazon.UserMicroservice.adapters.util.AdapConstants;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "user")
+@Table(name = AdapConstants.USER)
 public class UserEntity {
 
     @Id
@@ -19,7 +20,7 @@ public class UserEntity {
     private String email;
     private String password;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = AdapConstants.ROLE_ID, nullable = false)
     private RoleEntity role;
 
     public UserEntity() {}

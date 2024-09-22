@@ -1,6 +1,7 @@
 package com.emazon.UserMicroservice.domain.util;
 
 import com.emazon.UserMicroservice.domain.exception.*;
+import com.emazon.UserMicroservice.domain.model.Authentication;
 import com.emazon.UserMicroservice.domain.model.User;
 
 import java.time.LocalDate;
@@ -15,6 +16,18 @@ public class Validator {
         validatePhone(user.getPhone());
         validateIdDocument(user.getIdDocument());
         validateAge(user.getDateOfBirth());
+    }
+
+    public static void validateAuthentication(Authentication authentication){
+        if(authentication == null){
+            throw new InvalidCredentialsException(Constants.INVALID_CREDENTIALS);
+        }
+        if(authentication.getUsername() == null){
+            throw new InvalidUsernameException(Constants.INVALID_USERNAME);
+        }
+        if(authentication.getPassword() == null){
+            throw new InvalidPasswordException(Constants.INVALID_PASSWORD);
+        }
     }
 
     private static void validateMandatoryFields(User user) {

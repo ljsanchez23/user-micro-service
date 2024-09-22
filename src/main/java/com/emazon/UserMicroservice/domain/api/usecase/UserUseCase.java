@@ -2,9 +2,8 @@ package com.emazon.UserMicroservice.domain.api.usecase;
 
 import com.emazon.UserMicroservice.domain.api.IUserServicePort;
 import com.emazon.UserMicroservice.domain.exception.UserAlreadyExistsException;
-import com.emazon.UserMicroservice.domain.model.Role;
 import com.emazon.UserMicroservice.domain.model.User;
-import com.emazon.UserMicroservice.domain.spi.IPasswordEncoder;
+import com.emazon.UserMicroservice.domain.spi.IEncoderPort;
 import com.emazon.UserMicroservice.domain.spi.IUserPersistencePort;
 import com.emazon.UserMicroservice.domain.util.Constants;
 import com.emazon.UserMicroservice.domain.util.DefaultRoles;
@@ -12,10 +11,10 @@ import com.emazon.UserMicroservice.domain.util.Validator;
 
 public class UserUseCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
-    private final IPasswordEncoder passwordEncoder;
+    private final IEncoderPort passwordEncoder;
 
 
-    public UserUseCase(IUserPersistencePort userPersistencePort, IPasswordEncoder passwordEncoder){
+    public UserUseCase(IUserPersistencePort userPersistencePort, IEncoderPort passwordEncoder){
         this.userPersistencePort = userPersistencePort;
         this.passwordEncoder = passwordEncoder;
     }
@@ -26,8 +25,7 @@ public class UserUseCase implements IUserServicePort {
             throw new UserAlreadyExistsException(Constants.USER_WITH + user.getEmail() + Constants.ALREADY_EXISTS);
         }
         if(user.getRole() == null){
-            Role defaultRole = new Role(DefaultRoles.AUX_ID, DefaultRoles.AUX_ROLE, DefaultRoles.AUX_DESCRIPTION);
-            user.setRole(defaultRole);
+            user.setRole(DefaultRoles.ASSISTANT);
         }
 
         Validator.validateUser(user);
@@ -35,4 +33,5 @@ public class UserUseCase implements IUserServicePort {
         user.setPassword(encryptedPassword);
         userPersistencePort.createUser(user);
     }
+
 }

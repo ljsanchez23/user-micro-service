@@ -1,7 +1,7 @@
 package com.emazon.UserMicroservice.adapters.driving.controller;
 
 import com.emazon.UserMicroservice.adapters.driving.dto.request.UserRequest;
-import com.emazon.UserMicroservice.adapters.driving.mapper.IUserRequestMapper;
+import com.emazon.UserMicroservice.adapters.driving.mapper.request.IUserRequestMapper;
 import com.emazon.UserMicroservice.adapters.util.AdapConstants;
 import com.emazon.UserMicroservice.domain.api.IUserServicePort;
 import com.emazon.UserMicroservice.domain.model.User;

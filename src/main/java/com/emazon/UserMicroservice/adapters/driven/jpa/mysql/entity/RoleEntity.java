@@ -1,9 +1,10 @@
 package com.emazon.UserMicroservice.adapters.driven.jpa.mysql.entity;
 
+import com.emazon.UserMicroservice.adapters.util.AdapConstants;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = AdapConstants.ROLE)
 public class RoleEntity {
 
     @Id

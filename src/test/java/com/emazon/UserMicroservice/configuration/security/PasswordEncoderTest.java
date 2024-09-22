@@ -1,5 +1,6 @@
 package com.emazon.UserMicroservice.configuration.security;
 
+import com.emazon.UserMicroservice.adapters.driven.encoder.EncoderPort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ class PasswordEncoderTest {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @InjectMocks
-    private PasswordEncoder passwordEncoder;
+    private EncoderPort passwordEncoder;
 
     @BeforeEach
     void setUp() {

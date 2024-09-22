@@ -5,6 +5,7 @@ import com.emazon.UserMicroservice.adapters.driven.jpa.mysql.repository.IUserRep
 import com.emazon.UserMicroservice.domain.model.User;
 import com.emazon.UserMicroservice.domain.spi.IUserPersistencePort;
 
+
 public class UserAdapter implements IUserPersistencePort {
     private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
@@ -21,5 +22,9 @@ public class UserAdapter implements IUserPersistencePort {
     @Override
     public boolean existsByEmail(String email){
         return userRepository.findByEmail(email).isPresent();
+    }
+    @Override
+    public User findByEmail(String email){
+        return userEntityMapper.toDomain(userRepository.findByEmail(email).get());
     }
 }

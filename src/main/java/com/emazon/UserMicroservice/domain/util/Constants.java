@@ -17,6 +17,10 @@ public class Constants {
     public static final String PHONE_UNDER_THIRTEEN_CHARACTERS = "Phone number cannot exceed 13 characters.";
     public static final String IDENTIFICATION_MUST_BE_NUMERIC = "Document ID must be a positive numeric value.";
     public static final String USER_MUST_HAVE_EIGHTEEN = "The user must be at least 18 years old.";
+    public static final String INVALID_CREDENTIALS = "Your credentials are not valid, please rectify them.";
+    public static final String INVALID_USERNAME = "Invalid username";
+    public static final String INVALID_PASSWORD = "Invalid password";
+    public static final String USER_NOT_FOUND = "User not found";
     public static final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
     public static final String PHONE_REGEX = "^\\+?[0-9]{1,12}$";
